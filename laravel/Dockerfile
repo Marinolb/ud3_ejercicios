@@ -7,7 +7,9 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     curl \
     unzip \
-    git
+    git \
+    libmariadb-dev \
+    && docker-php-ext-install pdo_mysql
 
 # Instalar Composer
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
@@ -22,5 +24,4 @@ RUN echo "export PATH=/root/.composer/vendor/bin:$PATH" >> /root/.bashrc
 # Exponer el puerto para Laravel
 EXPOSE 8000
 
-# Comando predeterminado
 CMD ["bash"]
