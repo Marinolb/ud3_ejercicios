@@ -1,0 +1,183 @@
+Respuestas de ejercicios:
+
+4.-
+
+ a) ¿Qué crees que hace el método create de la clase Schema?
+
+	El método create de la clase Schema sirve para crear una nueva tabla en la base de datos, donde dentro podemos definirle las columnas y demás configuraciones en una función "callback".
+
+ b) ¿Qué crees que hace $table->string('email')->primary();?
+
+	Sirve para crear una columna llamada email, de tipo String y la hace clave primaria, siendo unica y not null.
+
+ c) ¿Cuantas tablas hay definidas? Indica el nombre de cada tabla
+
+	Me aparecen las tablas user, cache y jobs.
+
+
+
+5.-
+
++-----------------------+
+
+| Tables_in_test1       |
+
++-----------------------+
+
+| cache                 |
+
+| cache_locks           |
+
+| failed_jobs           |
+
+| job_batches           |
+
+| jobs                  |
+
+| migrations            |
+
+| password_reset_tokens |
+
+| sessions              |
+
+| users                 |
+
++-----------------------+
+
+9 rows in set (0.002 sec)
+
+
+
+6.-
+
+php artisan migrate: Aplica las migraciones pendientes y crea/actualiza las tablas en la base de datos.
+
+php artisan migrate:status: Muestra el estado de las migraciones (si están aplicadas o no).
+
+php artisan migrate:rollback: Revierte la última migración aplicada.
+
+php artisan migrate:reset: Revierte todas las migraciones, eliminando las tablas creadas.
+
+php artisan migrate:refresh: Revierte todas las migraciones y las vuelve a ejecutar.
+
+php artisan make:migration: Crea una nueva migración donde podremos modificar o crear tablas.
+
+php artisan migrate --seed: Aplica las migraciones y luego ejecuta los seeders.
+
+
+
+8.- 
+
+php artisan make:migration add_apellido_to_alumnos_table --table=alumnos
+
+abrimos la migración creada y en el método up incluimos la modificación:
+
+public function up(): void
+
+    {
+
+        Schema::table('alumnos', function (Blueprint $table) {
+
+            $table->string('apellido');
+
+        });
+
+    }
+
+
+
+9.- 
+
+MariaDB [test2]> select * from alumnos;
+
++----+------------------+----------------------------+---------------------+---------------------+
+
+| id | nombre           | email                      | created_at          | updated_at          |
+
++----+------------------+----------------------------+---------------------+---------------------+
+
+|  1 | Juan Pérez       | juan.perez@example.com     | 2024-12-23 16:32:05 | 2024-12-23 16:32:05 |
+
+|  2 | María González   | maria.gonzalez@example.com | 2024-12-23 16:32:05 | 2024-12-23 16:32:05 |
+
+|  3 | Carlos López     | carlos.lopez@example.com   | 2024-12-23 16:32:05 | 2024-12-23 16:32:05 |
+
++----+------------------+----------------------------+---------------------+---------------------+
+
+3 rows in set (0.001 sec)
+
+
+
+
+
+10.-
+
+
+
+MariaDB [(none)]> use gestion_notas
+
+Reading table information for completion of table and column names
+
+You can turn off this feature to get a quicker startup with -A
+
+
+
+Database changed
+
+MariaDB [gestion_notas]> select * from notas;
+
++-----------+---------------+------+---------------------+---------------------+
+
+| alumno_id | asignatura_id | nota | created_at          | updated_at          |
+
++-----------+---------------+------+---------------------+---------------------+
+
+|         1 |             1 | 8.50 | 2024-12-24 12:46:56 | 2024-12-24 12:46:56 |
+
+|         1 |             2 | 7.00 | 2024-12-24 12:46:56 | 2024-12-24 12:46:56 |
+
+|         2 |             3 | 9.20 | 2024-12-24 12:46:56 | 2024-12-24 12:46:56 |
+
++-----------+---------------+------+---------------------+---------------------+
+
+3 rows in set (0.001 sec)
+
+
+
+MariaDB [gestion_notas]> select * from alumnos;
+
++----+------------------+----------------------------+
+
+| id | nombre           | email                      |
+
++----+------------------+----------------------------+
+
+|  1 | Juan Pérez       | juan.perez@example.com     |
+
+|  2 | María González   | maria.gonzalez@example.com |
+
+|  3 | Carlos López     | carlos.lopez@example.com   |
+
++----+------------------+----------------------------+
+
+3 rows in set (0.001 sec)
+
+
+
+MariaDB [gestion_notas]> select * from asignaturas;
+
++----+--------------+----------------------------+
+
+| id | nombre       | descripcion                |
+
++----+--------------+----------------------------+
+
+|  1 | Matemáticas  | Asignatura de matemáticas  |
+
+|  2 | Historia     | Asignatura de historia     |
+
+|  3 | Ciencias     | Asignatura de ciencias     |
+
++----+--------------+----------------------------+
+
+3 rows in set (0.000 sec)
